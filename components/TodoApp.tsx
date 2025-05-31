@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
 import NewTodo from "@/components/NewTodo";
 import TodoList from "@/components/TodoList";
 import useTodos from "@/hooks/useTodos";
 
 export default function TodoApp() {
-    const { todos, loading, addTodo, updateTodo, deleteTodo, toggleTodo } = useTodos();
-
+  const { todos, addTodo, updateTodo, deleteTodo, toggleTodo, loading } = useTodos();
 
   return (
-    <div>
+    <main className="max-w-xl mx-auto mt-12 p-6 bg-gray-50 rounded-md shadow-lg">
+      <h1 className="text-3xl font-bold text-center mb-8 text-indigo-700">My Todo List</h1>
       <NewTodo onAdd={addTodo} />
       <TodoList
         todos={todos}
@@ -18,6 +18,6 @@ export default function TodoApp() {
         onToggle={toggleTodo}
         onDelete={deleteTodo}
       />
-    </div>
+    </main>
   );
 }

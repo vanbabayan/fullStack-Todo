@@ -1,33 +1,37 @@
-'use client'
+'use client';
 
-import { useState } from 'react';
+import { useState } from "react";
 
 type Props = {
   onAdd: (title: string) => void;
 };
 
-const NewTodo = ({ onAdd }: Props) => {
-  const [title, setTitle] = useState('');
+export default function NewTodo({ onAdd }: Props) {
+  const [title, setTitle] = useState("");
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const t = title.trim();
-    if (!t) return;
-    onAdd(t);
-    setTitle('');
+  const handleAdd = () => {
+    if (title.trim()) {
+      onAdd(title);
+      setTitle("");
+    }
   };
 
   return (
-    <form onSubmit={submit}>
+    <div className="flex gap-3 mb-6">
       <input
         type="text"
-        placeholder="Add new todo"
+        className="flex-grow px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        placeholder="Add new task"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
       />
-      <button className=' bg-grey-500' type="submit">Add Todo</button>
-    </form>
+      <button
+        className="bg-indigo-600 text-white px-5 py-2 rounded-md hover:bg-indigo-700 transition"
+        onClick={handleAdd}
+      >
+        Add
+      </button>
+    </div>
   );
-};
-
-export default NewTodo;
+}
